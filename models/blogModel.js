@@ -17,6 +17,10 @@ const blogSchema = new mongoose.Schema({
         url: String,
         key: String,
     },
+    // image{
+    //     type:String,
+    //     required:true
+    // }
 },
     {
         timestamps: true

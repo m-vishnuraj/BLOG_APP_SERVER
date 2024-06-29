@@ -56,9 +56,6 @@ exports.registerUser = async (req, res) => {
             { expiresIn: '7d' }
         );
 
-        // Respond with the saved user (excluding the password)
-        // const userResponse = savedUser.toObject();
-        // delete userResponse.password;
 
         res.status(201).json({
             message: 'User registered successfully',
@@ -88,15 +85,13 @@ exports.loginUser = async (req, res) => {
         // Extract user details from the request body
         const { email, password } = req.body;
 
-        console.log(email, password);
-
         // Check if the user exists
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
             return res.status(400).json({
                 message: 'Invalid Email',
                 success: false,
-                statusCode: 2,
+                statusCode: 0,
             });
         }
 
@@ -106,7 +101,7 @@ exports.loginUser = async (req, res) => {
             return res.status(400).json({
                 message: 'Invalid Password',
                 success: false,
-                statusCode: 2,
+                statusCode: 0,
             });
         }
 
@@ -116,10 +111,6 @@ exports.loginUser = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '7d' }
         );
-
-        // Respond with the user (excluding the password)
-        // const userResponse = existingUser.toObject();
-        // delete userResponse.password;
 
         res.status(200).json({
             message: 'User logged in successfully',

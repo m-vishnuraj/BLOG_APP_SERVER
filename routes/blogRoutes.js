@@ -15,6 +15,8 @@ const {
 const { userProtect } = require("../middlewares/authMiddlewares");
 
 router.post("/create-blog/:userId", userProtect, upload.single('image'), createBlogByUserId);
+// router.post("/create-blog/:userId", userProtect, createBlogByUserId);
+
 router.get("/get-blogs/:userId", userProtect, getBlogsByUserId);
 router.get("/get-blog/:blogId", userProtect, getBlogById);
 router.put('/update-blog/:userId/:blogId', userProtect, upload.single('image'), updateBlogByUserId);
