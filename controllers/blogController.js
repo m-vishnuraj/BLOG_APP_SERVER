@@ -34,7 +34,7 @@ exports.createBlogByUserId = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "Image is required",
-                statusCode: 2,
+                statusCode: 0,
             });
         }
 
@@ -45,7 +45,7 @@ exports.createBlogByUserId = async (req, res) => {
             return res.status(404).json({
                 success: false,
                 message: "User not found",
-                statusCode: 2,
+                statusCode: 0,
             });
         }
 
@@ -58,7 +58,7 @@ exports.createBlogByUserId = async (req, res) => {
             ACL: "public-read",
         };
 
-        // Upload image to S3
+        //????????????????????????????????????? Upload image to S3
         const putObjectCommand = new PutObjectCommand(s3Params);
         await s3.send(putObjectCommand);
 
@@ -71,6 +71,8 @@ exports.createBlogByUserId = async (req, res) => {
                 url: s3Params.Key,
                 key: s3Params.Key,
             },
+            // if revise the image from s3 to String
+            // image
         });
 
         // Save the new blog
